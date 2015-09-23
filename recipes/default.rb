@@ -85,7 +85,8 @@ when "debian"
       :user             => node["logstash-forwarder"]["user"],
       :group            => node["logstash-forwarder"]["group"],
       :log_dir          => node["logstash-forwarder"]["log_dir"],
-      :config_file      => node["logstash-forwarder"]["config_file"]
+      :config_file      => node["logstash-forwarder"]["config_file"],
+      :spool_size       => node["logstash-forwarder"]["spool_size"]
     )
     notifies :restart, "service[logstash-forwarder]"
   end

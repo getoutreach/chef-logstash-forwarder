@@ -13,3 +13,4 @@ default["logstash-forwarder"]["files"]                      = { "syslog" => [ '/
 default["logstash-forwarder"]["logstash_role"]              = "logstash"
 default["logstash-forwarder"]["logstash_fqdn"]              = ""
 default["logstash-forwarder"]["config_file"]                = "#{node["logstash-forwarder"]["dir"]}/logstash-forwarder.conf"
+default["logstash-forwarder"]["spool_size"]                 = "1024"
