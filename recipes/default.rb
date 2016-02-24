@@ -11,7 +11,9 @@ end
 host_hash = host_hash[0...-1]
 
 file_list = "  \"files\": ["
-node["logstash-forwarder"]["files"].each do |type, files| 
+node["logstash-forwarder"]["files"].each do |type, files|
+  raise "Invalid path(s) configured for type #{type}, this is possibly due to attribute loading precedence in your chef config." if files.any? &:nil?
+
   if !files.empty?
     file_list = file_list + "\n    {\n"
     file_list = file_list + "      \"paths\": #{files},\n"
