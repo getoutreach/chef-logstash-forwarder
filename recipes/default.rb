@@ -17,7 +17,13 @@ node["logstash-forwarder"]["files"].each do |type, files|
   if !files.empty?
     file_list = file_list + "\n    {\n"
     file_list = file_list + "      \"paths\": #{files},\n"
-    file_list = file_list + "      \"fields\": { \"type\": \"#{type}\" }\n"
+
+    fields = ["\"type\": \"#{type}\""]
+    node["logstash-forwarder"]["extra_fields"].each do |field, value|
+      fields.push("\"#{field}\": \"#{value}\"")
+    end
+
+    file_list = file_list + "      \"fields\": { #{fields.join ", "} }\n"
     file_list = file_list + "    },"
   end
 end
